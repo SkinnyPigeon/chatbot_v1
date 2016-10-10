@@ -52,7 +52,7 @@ var playGame = function( message, userstate ) {
 			start( userstate );
 			break
 		case "!join":
-			join( userstate, message, words[1] );
+			join( userstate, words[1] );
 			break
 		case "!play":
 			play( userstate )
@@ -76,15 +76,11 @@ var start = function( userstate ) {
 	games.push( game );
 };
 
-var join = function( userstate, message, friendsName ) {
+var join = function( userstate, friendsName ) {
 	var name = userstate[ 'username' ];
-	// var words = message.split( " " );
-	// var friendsName = words[1];
-	console.log( friendsName );
 	for( var i = 0; i < games.length; i++ ) {
 		for( var j = 0; j < games[i].players.length; j++ ) {
 			if( games[i].players[j].name.toLowerCase() === friendsName.toLowerCase() ) {
-				console.log( "Hello" );
 				var player = new Player( name );
 				games[i].addPlayer( player );
 			}
@@ -95,9 +91,9 @@ var join = function( userstate, message, friendsName ) {
 var play = function( userstate ) {
 	var name = userstate[ 'username' ];
 	for( var i = 0; i < games.length; i++ ) {
-		// if( games[i].id === name ) {
-			console.log( games[i].players );
-		// }
+		for( var j = 0; j < games[i].players.length; j++ ) {
+
+		}
 	}
 };
 
