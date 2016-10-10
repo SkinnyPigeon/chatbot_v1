@@ -1,5 +1,6 @@
 var tmi = require( 'tmi.js' );
 var Calculator = require( './models/Calculator' );
+var Cards = require( './models/Cards' );
 
 var options = {
     options: {
@@ -24,10 +25,19 @@ client.on( 'connected', function( address, port ) {
     client.action( "skinnypigeon I am connected to your chat" );
 })
 
+// client.on( 'chat', function( channel, user, message, self ) {
+//     var calc = new Calculator();
+//     calc.sum( message );
+//     var answer = calc.equals();
+//     client.action( "skinnypigeon", answer );
+//     console.log( answer );
+// });
+
 client.on( 'chat', function( channel, user, message, self ) {
-    var calc = new Calculator();
-    calc.sum( message );
-    var answer = calc.equals();
-    client.action( "skinnypigeon", answer );
-    console.log( answer );
+    var pack = new Cards();
+    var card1 = pack.deal();
+    var card2 = pack.deal();
+    var cards = card1 + card2;
+
+    client.action( "skinnypigeon", cards );
 });
