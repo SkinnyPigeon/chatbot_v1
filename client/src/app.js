@@ -44,18 +44,13 @@ client.on( 'connected', function( address, port ) {
 
 client.on("message", function (channel, userstate, message, self) {
     if (self) return;
-    
+
     switch(userstate["message-type"]) {
         case "action":
             break;
         case "chat":
             if( message === "!deal" ) {
-                var pack = new Cards();
-                var card1 = pack.deal();
-                var card2 = pack.deal();
-                var cards = card1 + card2;
-
-                client.action( "skinnypigeon", cards );
+                deal();
         }
             break;
         case "whisper":
@@ -64,3 +59,12 @@ client.on("message", function (channel, userstate, message, self) {
             break;
     }
 });
+
+var deal = function() {
+    var pack = new Cards();
+    var card1 = pack.deal();
+    var card2 = pack.deal();
+    var cards = card1 + card2;
+
+    client.action( "skinnypigeon", cards );
+}
