@@ -1,5 +1,5 @@
 var tmi = require( 'tmi.js' );
-var Calculator = require( './src/Calculator' );
+var Calculator = require( './models/Calculator' );
 
 var options = {
     options: {
