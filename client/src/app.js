@@ -45,7 +45,6 @@ client.on( 'message', function( channel, userstate, message, self ) {
 });
 
 var playGame = function( message, userstate ) {
-	console.log( userstate );
 	switch( message ) {
 		case "!play":
 			play( userstate )
@@ -57,6 +56,11 @@ var playGame = function( message, userstate ) {
 	}
 };
 
+var play = function( userstate ) {
+	var game = new Game();
+
+};
+
 var deal = function() {
 	var pack = new Cards;
 	var card1 = pack.deal();
@@ -64,7 +68,7 @@ var deal = function() {
 	var cards = card1 + card2;
 
 	client.action( "skinnypigeon", cards );
-}
+};
 
 
 

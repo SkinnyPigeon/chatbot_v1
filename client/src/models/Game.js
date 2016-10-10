@@ -3,7 +3,9 @@ var Game = function() {
 }
 
 Game.prototype = {
-	
+	addPlayer: function( player ) {
+		this.players.push( player );
+	}
 }
 
 module.exports = Game;
