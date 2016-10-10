@@ -33,11 +33,34 @@ client.on( 'connected', function( address, port ) {
 //     console.log( answer );
 // });
 
-client.on( 'chat', function( channel, user, message, self ) {
-    var pack = new Cards();
-    var card1 = pack.deal();
-    var card2 = pack.deal();
-    var cards = card1 + card2;
+// client.on( 'chat', function( channel, user, message, self ) {
+//     var pack = new Cards();
+//     var card1 = pack.deal();
+//     var card2 = pack.deal();
+//     var cards = card1 + card2;
 
-    client.action( "skinnypigeon", cards );
+//     client.action( "skinnypigeon", cards );
+// });
+
+client.on("message", function (channel, userstate, message, self) {
+    if (self) return;
+    
+    switch(userstate["message-type"]) {
+        case "action":
+            break;
+        case "chat":
+            if( message === "!deal" ) {
+                var pack = new Cards();
+                var card1 = pack.deal();
+                var card2 = pack.deal();
+                var cards = card1 + card2;
+
+                client.action( "skinnypigeon", cards );
+        }
+            break;
+        case "whisper":
+            break;
+        default:
+            break;
+    }
 });
