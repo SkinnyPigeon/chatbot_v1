@@ -2,6 +2,7 @@ var tmi = require( 'tmi.js' );
 
 var Cards = require( './models/Cards' );
 var Game = require( './models/Game' );
+var Player = require( './models/Player' );
 
 var options = {
 	options: {
@@ -46,6 +47,8 @@ client.on( 'message', function( channel, userstate, message, self ) {
 
 var playGame = function( message, userstate ) {
 	switch( message ) {
+		case "!start":
+			start( userstate );
 		case "!play":
 			play( userstate )
 		case "!deal":
@@ -56,9 +59,13 @@ var playGame = function( message, userstate ) {
 	}
 };
 
-var play = function( userstate ) {
+var start = function( userstate ) {
+	var player = new Player( userstate[ 'username' ]);
 	var game = new Game();
+	game.addPlayer( player );
+};
 
+var play = function( userstate ) {
 };
 
 var deal = function() {
