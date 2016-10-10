@@ -1,5 +1,5 @@
 var tmi = require( 'tmi.js' );
-var Calc = require( './src/calc' );
+var Calculator = require( './src/Calculator' );
 
 var options = {
     options: {
@@ -10,7 +10,7 @@ var options = {
         reconnect: true
     },
     identity: {
-        username: "robobleepbloop",
+        username: "RoboBleepBloop",
         password: "oauth:if3e2ziho9n2bdoy053vie45w2g1t3"
     },
     channels: [ 'skinnypigeon' ]
@@ -25,8 +25,9 @@ client.on( 'connected', function( address, port ) {
 })
 
 client.on( 'chat', function( channel, user, message, self ) {
-    var calc = new Calc();
-    var answer = calc.multi();
-    // client.action( "skinnypigeon", user[ 'display-name' ] + " I am connected to your chat" );
+    var calc = new Calculator();
+    calc.sum( message );
+    var answer = calc.equals();
     client.action( "skinnypigeon", answer );
+    console.log( answer );
 });
