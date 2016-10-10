@@ -45,7 +45,7 @@ client.on( 'message', function( channel, userstate, message, self ) {
 });
 
 var play = function( message ) {
-	switch message {
+	switch( message ) {
 		case "!deal":
 			console.log( "dealt" );
 			break
