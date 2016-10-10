@@ -49,8 +49,10 @@ var playGame = function( message, userstate ) {
 	switch( message ) {
 		case "!start":
 			start( userstate );
+			break
 		case "!play":
 			play( userstate )
+			break
 		case "!deal":
 			deal();
 			break
@@ -59,13 +61,24 @@ var playGame = function( message, userstate ) {
 	}
 };
 
+var games = [];
+
 var start = function( userstate ) {
-	var player = new Player( userstate[ 'username' ]);
+	var name = userstate[ 'username' ];
+	var player = new Player( name );
 	var game = new Game();
+	game.id = name;
 	game.addPlayer( player );
+	games.push( game );
 };
 
 var play = function( userstate ) {
+	var name = userstate[ 'username' ];
+	for( var i = 0; i < games.length; i++ ) {
+		if( games[i].id === name ) {
+			console.log( games[i] );
+		}
+	}
 };
 
 var deal = function() {
