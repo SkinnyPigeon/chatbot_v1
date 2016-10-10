@@ -1,4 +1,5 @@
-var Game = function() {
+var Game = function( cards ) {
+	this.cards = cards;
   this.players = [];
   this.pot = 0;
 }

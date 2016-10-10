@@ -74,7 +74,9 @@ var games = [];
 var start = function( userstate ) {
 	var name = userstate[ 'username' ];
 	var player = new Player( name );
-	var game = new Game();
+	var pack = new Cards;
+	var game = new Game( pack );
+
 	game.id = name;
 	game.addPlayer( player );
 	games.push( game );
@@ -97,10 +99,11 @@ var play = function( userstate ) {
 	for( var i = 0; i < games.length; i++ ) {
 		for( var j = 0; j < games[i].players.length; j++ ) {
 			if( games[i].players[j].name === name ) {
-				var card1 = pack.deal();
-				var card2 = pack.deal();
+				var card1 = games[i].cards.deal();
+				var card2 = games[i].cards.deal();
 				games[i].players[j].getCard( card1 );
 				games[i].players[j].getCard( card2 );
+				client.whisper( userstate[ 'username' ], games[i].players[j].hand );
 			}
 		}
 	}
