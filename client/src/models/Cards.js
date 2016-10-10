@@ -1,7 +1,7 @@
 var _ = require( 'lodash' );
 
 var Cards = function() {
-	this.cards = [ "1♠️ ", "1♥️ ", "1♣️ ", "1♦️ " ];
+	this.cards = [ "A♠️ ", "A♥️ ", "A♣️ ", "A♦️ " ];
 	this.shuffle();
 }
 
