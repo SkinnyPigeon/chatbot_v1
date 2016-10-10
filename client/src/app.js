@@ -3,6 +3,7 @@ var tmi = require( 'tmi.js' );
 var Cards = require( './models/Cards' );
 var Game = require( './models/Game' );
 var Player = require( './models/Player' );
+var pack = new Cards;
 
 var options = {
 	options: {
@@ -60,6 +61,9 @@ var playGame = function( message, userstate ) {
 		case "!deal":
 			deal();
 			break
+		case "!state":
+			state();
+			break
 		default:
 			break
 	}
@@ -92,18 +96,20 @@ var play = function( userstate ) {
 	var name = userstate[ 'username' ];
 	for( var i = 0; i < games.length; i++ ) {
 		for( var j = 0; j < games[i].players.length; j++ ) {
-
+			if( games[i].players[j].name === name ) {
+				var card1 = pack.deal();
+				var card2 = pack.deal();
+				games[i].players[j].getCard( card1 );
+				games[i].players[j].getCard( card2 );
+			}
 		}
 	}
 };
 
-var deal = function() {
-	var pack = new Cards;
-	var card1 = pack.deal();
-	var card2 = pack.deal();
-	var cards = card1 + card2;
-	client.action( "skinnypigeon", cards );
-};
+var state = function() {
+	console.log( games[0].players[0].hand );
+	console.log( games[0].players[1].hand );
+}
 
 
 
