@@ -46,9 +46,13 @@ client.on( 'message', function( channel, userstate, message, self ) {
 });
 
 var playGame = function( message, userstate ) {
-	switch( message ) {
+	var words = message.split( " " );
+	switch( words[0] ) {
 		case "!start":
 			start( userstate );
+			break
+		case "!join":
+			join( userstate, message, words[1] );
 			break
 		case "!play":
 			play( userstate )
@@ -72,12 +76,28 @@ var start = function( userstate ) {
 	games.push( game );
 };
 
+var join = function( userstate, message, friendsName ) {
+	var name = userstate[ 'username' ];
+	// var words = message.split( " " );
+	// var friendsName = words[1];
+	console.log( friendsName );
+	for( var i = 0; i < games.length; i++ ) {
+		for( var j = 0; j < games[i].players.length; j++ ) {
+			if( games[i].players[j].name.toLowerCase() === friendsName.toLowerCase() ) {
+				console.log( "Hello" );
+				var player = new Player( name );
+				games[i].addPlayer( player );
+			}
+		}
+	}
+};
+
 var play = function( userstate ) {
 	var name = userstate[ 'username' ];
 	for( var i = 0; i < games.length; i++ ) {
-		if( games[i].id === name ) {
-			console.log( games[i] );
-		}
+		// if( games[i].id === name ) {
+			console.log( games[i].players );
+		// }
 	}
 };
 
@@ -86,7 +106,6 @@ var deal = function() {
 	var card1 = pack.deal();
 	var card2 = pack.deal();
 	var cards = card1 + card2;
-
 	client.action( "skinnypigeon", cards );
 };
 
