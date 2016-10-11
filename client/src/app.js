@@ -113,15 +113,3 @@ var state = function() {
 	console.log( games[0].players[0].hand );
 	console.log( games[0].players[1].hand );
 }
-
-
-
-
-
-
-
-
-
-
-
-
