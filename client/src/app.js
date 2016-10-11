@@ -1,8 +1,6 @@
 var tmi = require( 'tmi.js' );
 
-var Cards = require( './models/Cards' );
-var Game = require( './models/Game' );
-var Player = require( './models/Player' );
+
 var Chat = require( './models/Chat' );
 
 var options = {
@@ -22,10 +20,13 @@ var options = {
 
 var client = new tmi.client( options );
 
+var chat;
+
 client.connect();
 
 client.on( 'connected', function( address, port ) {
 	client.action( "skinnypigeon I am connected to your chat" );
+	chat = new Chat();
 });
 
 client.on( 'message', function( channel, userstate, message, self ) {
@@ -50,19 +51,19 @@ var playGame = function( message, userstate ) {
 	var words = message.split( " " );
 	switch( words[0] ) {
 		case "!start":
-			start( userstate );
+			chat.start( userstate );
 			break
 		case "!join":
-			join( userstate, words[1] );
+			chat.join( userstate, words[1] );
 			break
 		case "!play":
-			play( userstate )
+			chat.play( client, userstate )
 			break
 		case "!deal":
-			deal();
+			chat.deal();
 			break
 		case "!state":
-			state();
+			chat.state();
 			break
 		default:
 			break

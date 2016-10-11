@@ -1,6 +1,8 @@
-var Chat = function( message, userstate ) {
-  this.message = message;
-  this.userstate = userstate;
+var Cards = require( './Cards' );
+var Game = require( './Game' );
+var Player = require( './Player' );
+
+var Chat = function() {
   this.games = [];
 }
 
@@ -39,14 +41,14 @@ Chat.prototype = {
           this.games[i].players[j].getCard( card1 );
           this.games[i].players[j].getCard( card2 );
           client.whisper( userstate[ 'username' ], this.games[i].players[j].hand );
-        }.bind( this );
-      }.bind( this );
+        }
+      }
     }
   },
 
   state: function() {
     console.log( this.games[0].players[0].hand );
-    console.log( this.games[0].players[1].hand );
+    console.log( this.games[1].players[0].hand );
   },
 
 }
