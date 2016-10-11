@@ -3,7 +3,7 @@ var tmi = require( 'tmi.js' );
 var Cards = require( './models/Cards' );
 var Game = require( './models/Game' );
 var Player = require( './models/Player' );
-var pack = new Cards;
+var Chat = require( './models/Chat' );
 
 var options = {
 	options: {
