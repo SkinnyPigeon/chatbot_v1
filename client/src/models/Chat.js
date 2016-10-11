@@ -17,16 +17,36 @@ Chat.prototype = {
     this.games.push( game );
   },
 
-  join: function() {
+  join: function( userstate, friendsName ) {
     var name = userstate[ 'username' ];
-    for( var i = 0; i < games.length; i++ ) {
-      for( var j = 0; j < games[i].players.length; j++ ) {
-        if( games[i].players[j].name.toLowerCase() === friendsName.toLowerCase() ) {
+    for( var i = 0; i < this.games.length; i++ ) {
+      for( var j = 0; j < this.games[i].players.length; j++ ) {
+        if( this.games[i].players[j].name.toLowerCase() === friendsName.toLowerCase() ) {
           var player = new Player( name );
-          games[i].addPlayer( player );
+          this.games[i].addPlayer( player );
         }
       }
     }
+  },
+
+  play: function( client, userstate ) {
+    var name = userstate[ 'username' ];
+    for( var i = 0; i < this.games.length; i++ ) {
+      for( var j = 0; j < this.games[i].players.length; j++ ) {
+        if( this.games[i].players[j].name === name ) {
+          var card1 = this.games[i].cards.deal();
+          var card2 = this.games[i].cards.deal();
+          this.games[i].players[j].getCard( card1 );
+          this.games[i].players[j].getCard( card2 );
+          client.whisper( userstate[ 'username' ], this.games[i].players[j].hand );
+        }.bind( this );
+      }.bind( this );
+    }
+  },
+
+  state: function() {
+    console.log( this.games[0].players[0].hand );
+    console.log( this.games[0].players[1].hand );
   },
 
 }
