@@ -1,6 +1,5 @@
 var tmi = require( 'tmi.js' );
 
-
 var Chat = require( './models/Chat' );
 
 var options = {
@@ -44,7 +43,6 @@ client.on( 'message', function( channel, userstate, message, self ) {
 		default:
 			break;
 	}
-
 });
 
 var playGame = function( message, userstate ) {

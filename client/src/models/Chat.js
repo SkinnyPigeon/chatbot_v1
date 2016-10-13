@@ -46,6 +46,8 @@ Chat.prototype = {
     }
   },
 
+  
+
   state: function() {
     console.log( this.games[0].players[0].hand );
     console.log( this.games[1].players[0].hand );
