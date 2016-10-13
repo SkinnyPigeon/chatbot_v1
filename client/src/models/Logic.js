@@ -7,6 +7,25 @@ var Logic = function( cards ) {
 
 Logic.prototype = {
 
+  setScores: function() {
+    this.handleAces()
+    for( var i = 0; i < this.cards.length; i++ ) {
+      this.handleCards( this.cards[0] );
+    }
+  },
+
+  handleTotalScore: function() {
+    if( this.total + this.aceHigh <= 21 ) {
+      this.total += this.aceHigh;
+      return true;
+    } else if( this.total + this.aceLow <= 21 ) {
+      this.total += this.aceLow;
+      return true;
+    } else {
+      return false;
+    }
+  },
+
   handleAces: function() {
     for( var i = 0; i < this.cards.length; i++ ) {
       if( this.cards[i].chatAt(0) === "A" ) {
@@ -16,7 +35,7 @@ Logic.prototype = {
     }
   },
 
-  setScore: function( card ) {
+  handleCards: function( card ) {
     this.total = 0;
     switch( card ) {
       case "2":
@@ -55,8 +74,12 @@ Logic.prototype = {
       case "K":
         this.total += 10;
         break
+      default:
+        break
     }
-  }
+  },
+
+
 }
 
 module.exports = Logic;
